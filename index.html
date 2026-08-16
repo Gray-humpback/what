@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관계대명사 마스터 트레이닝</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Chosen Palette: Warm Cream & Indigo Slate */
+        :root {
+            --bg-main: #fdfbf7;
+            --card-bg: #ffffff;
+            --accent-indigo: #3730a3;
+            --accent-purple: #4f46e5;
+            --accent-amber: #d97706;
+            --text-main: #1e1b4b;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 260px;
+            max-height: 300px;
+        }
+
+        .chip-btn {
+            transition: all 0.15s ease-in-out;
+        }
+        .chip-btn:hover {
+            transform: translateY(-1px);
+        }
+        .chip-btn:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white border-b border-indigo-100 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl">🔗</span>
+                <div>
+                    <h1 class="text-xl font-bold text-indigo-950">관계대명사 마스터 트레이닝</h1>
+                    <p class="text-xs text-indigo-600">who • which • whose • that • 선행사를 포함하는 관계대명사 what 완벽 마스터</p>
+                </div>
+            </div>
+            
+            <nav class="flex flex-wrap gap-2 bg-indigo-50/80 p-1 rounded-xl text-sm font-medium border border-indigo-100">
+                <button onclick="switchTab('overview')" id="tab-overview" class="px-4 py-2 rounded-lg bg-white shadow-sm text-indigo-900 font-bold transition">
+                    💡 개념 & 핵심 규칙 정리
+                </button>
+                <button onclick="switchTab('practice')" id="tab-practice" class="px-4 py-2 rounded-lg text-indigo-700 hover:text-indigo-950 transition">
+                    📝 카드 배열 & 영작 연습
+                </button>
+                <button onclick="switchTab('test')" id="tab-test" class="px-4 py-2 rounded-lg text-indigo-700 hover:text-indigo-950 transition">
+                    🎯 빈칸 & 실전 진단 테스트
+                </button>
+            </nav>
+             <!-- 메인 포털 이동 버튼 (상단 헤더 오른쪽) -->
+            <a href="https://gray-humpback.github.io/grammargo/" target="_self" class="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl transition shadow-sm flex items-center gap-1.5 shrink-0">
+                    <span>🏠</span> <span>메인 포털로 돌아가기</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-grow w-full space-y-8">
+
+        <!-- SECTION 1: CORE CONCEPTS OVERVIEW -->
+        <section id="sec-overview" class="space-y-8">
+            
+            <!-- 1. Basics: Combining Sentences -->
+            <div class="bg-indigo-50/70 border border-indigo-200 rounded-2xl p-6 space-y-4">
+                <h2 class="text-lg font-bold text-indigo-950 flex items-center gap-2">
+                    <span>📌</span> 1. 관계대명사의 기본 원리 (두 문장 연결하기)
+                </h2>
+                <p class="text-sm text-stone-700 leading-relaxed">
+                    관계대명사는 <strong>[접속사 + 대명사]</strong>의 역할을 동시에 수행하며, 앞에 오는 명사(<strong>선행사</strong>)를 수식하는 <strong>형용사절</strong>을 이끕니다.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="bg-white p-4 rounded-xl border border-indigo-200 shadow-sm space-y-2">
+                        <span class="font-bold text-indigo-900 block border-b pb-1">① 주격 관계대명사 (who / which)</span>
+                        <p class="text-stone-600">뒤 문장의 <strong>주어</strong> 역할을 겸함</p>
+                        <p class="font-mono text-indigo-800 bg-indigo-50/50 p-2 rounded">
+                            My brother is a programmer. + <u>He</u> lives in Canada.<br>
+                            ➔ My brother <strong>who</strong> lives in Canada is a programmer.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-indigo-200 shadow-sm space-y-2">
+                        <span class="font-bold text-indigo-900 block border-b pb-1">② 목적격 관계대명사 (whom / which)</span>
+                        <p class="text-stone-600">뒤 문장의 <strong>목적어</strong> 역할을 겸함 (생략 가능)</p>
+                        <p class="font-mono text-indigo-800 bg-indigo-50/50 p-2 rounded">
+                            The movie was touching. + We saw <u>it</u> yesterday.<br>
+                            ➔ The movie <strong>(which)</strong> we saw yesterday was touching.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-indigo-200 shadow-sm space-y-2">
+                        <span class="font-bold text-indigo-900 block border-b pb-1">③ 소유격 관계대명사 (whose)</span>
+                        <p class="text-stone-600">뒤 문장의 <strong>소유격( his / her / my )</strong>을 대신함</p>
+                        <p class="font-mono text-indigo-800 bg-indigo-50/50 p-2 rounded">
+                            The boy is my classmate. + <u>His</u> father is a chef.<br>
+                            ➔ The boy <strong>whose</strong> father is a chef is my classmate.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. What Concept -->
+            <div class="bg-white rounded-2xl border border-stone-200 p-6 shadow-sm space-y-4">
+                <h3 class="text-md font-bold text-indigo-950 flex items-center gap-2">
+                    <span>🌟</span> 2. 선행사를 포함한 관계대명사 What의 3대 특징
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="bg-amber-50/80 p-4 rounded-xl border border-amber-200 space-y-1.5">
+                        <strong class="text-amber-900 block font-bold text-sm">① 선행사가 없다 (선행사 포함)</strong>
+                        <p class="text-stone-700 leading-relaxed">
+                            자체에 선행사 <code>the thing(s) which/that</code>을 포함하고 있으므로, 바로 앞에 꾸며주는 명사가 오지 않습니다.
+                        </p>
+                        <p class="font-mono text-amber-900 bg-white p-2 rounded border border-amber-200">
+                            The things + you do today...<br>
+                            ➔ <strong>What</strong> you do today can change the world.
+                        </p>
+                    </div>
+
+                    <div class="bg-amber-50/80 p-4 rounded-xl border border-amber-200 space-y-1.5">
+                        <strong class="text-amber-900 block font-bold text-sm">② 명사절 역할 (주어/목적어/보어)</strong>
+                        <p class="text-stone-700 leading-relaxed">
+                            다른 관계대명사(형용사절)와 달리, what절은 문장 전체에서 <strong>명사역할(주/목/보)</strong>을 합니다.
+                        </p>
+                        <p class="font-mono text-amber-900 bg-white p-2 rounded border border-amber-200">
+                            • [주어] <strong>What</strong> I like is soccer.<br>
+                            • [목적어] Do <strong>what</strong> makes you happy.<br>
+                            • [보어] This is <strong>what</strong> I want.
+                        </p>
+                    </div>
+
+                    <div class="bg-amber-50/80 p-4 rounded-xl border border-amber-200 space-y-1.5">
+                        <strong class="text-amber-900 block font-bold text-sm">③ '~하는 것' 해석 & 3인칭 단수 취급</strong>
+                        <p class="text-stone-700 leading-relaxed">
+                            what절이 주어 자리에 올 때는 기본적으로 <strong>3인칭 단수(is/was)</strong> 취급을 합니다.
+                        </p>
+                        <p class="font-mono text-amber-900 bg-white p-2 rounded border border-amber-200">
+                            <strong>What</strong> she did yesterday <strong>was</strong> (were ✗) very surprising to all of her friends.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. What vs That Comparison Table -->
+            <div class="bg-white rounded-2xl border border-stone-200 p-6 shadow-sm space-y-4">
+                <h3 class="text-md font-bold text-indigo-950 flex items-center gap-2">
+                    <span>⚖️</span> 3. 시험에 단골 출제되는 관계대명사 what vs 관계대명사 that vs 접속사 that
+                </h3>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left border-collapse border border-stone-200 rounded-lg">
+                        <thead>
+                            <tr class="bg-indigo-900 text-white font-bold">
+                                <th class="p-3 border border-stone-200">구분</th>
+                                <th class="p-3 border border-stone-200">선행사 (앞 명사)</th>
+                                <th class="p-3 border border-stone-200">뒷문장 구조</th>
+                                <th class="p-3 border border-stone-200">역할 & 해석</th>
+                                <th class="p-3 border border-stone-200">예문</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-200 text-stone-700">
+                            <tr class="bg-amber-50/50">
+                                <td class="p-3 font-bold text-amber-900">관계대명사 what</td>
+                                <td class="p-3 font-bold text-rose-600">✕ (없음)</td>
+                                <td class="p-3 font-bold text-rose-600">불완전 (주어/목적어 누락)</td>
+                                <td class="p-3">명사절 (~하는 것)</td>
+                                <td class="p-3 font-mono text-amber-900">Let's eat <strong>what</strong> you like.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-indigo-900">관계대명사 that</td>
+                                <td class="p-3 font-bold text-emerald-600">◯ (있음)</td>
+                                <td class="p-3 font-bold text-rose-600">불완전 (주어/목적어 누락)</td>
+                                <td class="p-3">형용사절 (선행사 수식)</td>
+                                <td class="p-3 font-mono text-indigo-900">Let's eat the menu <strong>that</strong> you like.</td>
+                            </tr>
+                            <tr class="bg-stone-50">
+                                <td class="p-3 font-bold text-stone-800">접속사 that</td>
+                                <td class="p-3">✕ (없음) 또는 동격명사</td>
+                                <td class="p-3 font-bold text-emerald-600">완전한 문장</td>
+                                <td class="p-3">명사절 / 동격 (~라는 것)</td>
+                                <td class="p-3 font-mono text-stone-800">I believe <strong>that</strong> you like this menu.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 4. Full Relative Pronoun Summary Table -->
+            <div class="bg-white rounded-2xl border border-stone-200 p-6 shadow-sm space-y-4">
+                <h3 class="text-md font-bold text-indigo-950 flex items-center gap-2">
+                    <span>📊</span> 4. 관계대명사 전체 총정리 표
+                </h3>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-center border-collapse border border-stone-200">
+                        <thead>
+                            <tr class="bg-stone-800 text-white font-bold">
+                                <th class="p-2.5 border border-stone-300">선행사 유무</th>
+                                <th class="p-2.5 border border-stone-300">선행사 종류</th>
+                                <th class="p-2.5 border border-stone-300">주격</th>
+                                <th class="p-2.5 border border-stone-300">목적격</th>
+                                <th class="p-2.5 border border-stone-300">소유격</th>
+                                <th class="p-2.5 border border-stone-300">문장 내 역할</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-200 text-stone-700">
+                            <tr>
+                                <td class="p-2.5 font-bold text-emerald-700 bg-emerald-50" rowspan="3">선행사 있음<br>(선행사 수식)</td>
+                                <td class="p-2.5 font-bold">사람</td>
+                                <td class="p-2.5 font-mono">who</td>
+                                <td class="p-2.5 font-mono">whom / who</td>
+                                <td class="p-2.5 font-mono">whose</td>
+                                <td class="p-2.5 text-xs text-stone-500" rowspan="3">형용사절<br>(명사 수식)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-bold">사물 / 동물</td>
+                                <td class="p-2.5 font-mono">which</td>
+                                <td class="p-2.5 font-mono">which</td>
+                                <td class="p-2.5 font-mono">whose / of which</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2.5 font-bold">사람 + 사물 / 특수선행사</td>
+                                <td class="p-2.5 font-mono">that</td>
+                                <td class="p-2.5 font-mono">that</td>
+                                <td class="p-2.5 font-mono text-stone-400">✕</td>
+                            </tr>
+                            <tr class="bg-amber-50">
+                                <td class="p-2.5 font-bold text-rose-700">선행사 없음</td>
+                                <td class="p-2.5 font-bold text-stone-500">선행사 포함 (the thing)</td>
+                                <td class="p-2.5 font-mono font-bold text-amber-900">what</td>
+                                <td class="p-2.5 font-mono font-bold text-amber-900">what</td>
+                                <td class="p-2.5 font-mono text-stone-400">✕</td>
+                                <td class="p-2.5 text-xs font-bold text-amber-900">명사절<br>(주어, 목적어, 보어)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="text-center pt-2">
+                <button onclick="switchTab('practice')" class="px-8 py-3.5 bg-indigo-700 hover:bg-indigo-800 text-white font-bold rounded-xl shadow-md transition transform hover:scale-105 flex items-center gap-2 mx-auto text-sm">
+                    <span>👉</span> 단어 카드 배열 & 관계대명사 영작 연습하러 가기
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION 2: CARD PRACTICE MODULE -->
+        <section id="sec-practice" class="hidden space-y-6">
+            <!-- Filter Bar -->
+            <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-xl border border-stone-200 shadow-sm">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-sm font-bold text-stone-700">연습 유형 필터:</span>
+                    <button onclick="setPracticeCategory('all')" id="pcat-all" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-700 text-white">전체 문항 (13문항)</button>
+                    <button onclick="setPracticeCategory('what')" id="pcat-what" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200">관계대명사 What</button>
+                    <button onclick="setPracticeCategory('general')" id="pcat-general" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200">주격/목적격/소유격</button>
+                    <button onclick="setPracticeCategory('that_special')" id="pcat-that_special" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200">that 특수 용법</button>
+                </div>
+                <div class="text-xs text-stone-500">
+                    💡 단어 카드를 클릭하여 어순을 만들고, 필요한 경우 <strong>관계대명사(who, which, what, whose, that)</strong>를 추가하여 영작하세요!
+                </div>
+            </div>
+
+            <!-- Card View Container -->
+            <div id="practice-card-container" class="bg-white rounded-2xl border border-stone-200 p-6 shadow-sm">
+                <!-- Dynamically Rendered by JS -->
+            </div>
+        </section>
+
+        <!-- SECTION 3: QUIZ & DIAGNOSTIC -->
+        <section id="sec-test" class="hidden space-y-6">
+            <div class="bg-indigo-950 text-white p-6 rounded-2xl flex flex-col md:flex-row justify-between items-center gap-6 shadow-md">
+                <div>
+                    <span class="px-3 py-1 bg-indigo-500/30 text-indigo-300 border border-indigo-400/30 rounded-full text-xs font-bold">실전 문법 진단</span>
+                    <h2 class="text-xl md:text-2xl font-bold mt-2">관계대명사 & What 빈칸 / O,X 진단 테스트</h2>
+                    <p class="text-xs text-indigo-300 mt-1">선행사 유무, 격(주격/목적격/소유격), what vs that 구분을 완벽 판별해 보세요.</p>
+                </div>
+                <button onclick="resetTest()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-stone-950 font-bold rounded-xl text-sm transition shrink-0">
+                    🔄 테스트 다시 시작
+                </button>
+            </div>
+
+            <!-- Quiz Grid -->
+            <div id="quiz-wrapper" class="space-y-6">
+                <!-- Dynamic Quiz Questions Rendered Here -->
+            </div>
+
+            <!-- Test Summary Chart Dashboard -->
+            <div id="quiz-results" class="hidden bg-white rounded-2xl border border-stone-200 p-6 shadow-sm space-y-6">
+                <h3 class="text-xl font-bold text-center text-indigo-950">🎯 관계대명사 실전 진단 평가 리포트</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div class="chart-container">
+                        <canvas id="scoreChart"></canvas>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+                            <p class="text-xs text-indigo-600 font-bold">최종 점수</p>
+                            <p class="text-3xl font-extrabold text-indigo-950" id="final-score-text">0 / 0</p>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+                            <p class="text-xs text-indigo-600 font-bold">영역별 약점 분석 및 맞춤 피드백</p>
+                            <p class="text-sm font-medium text-stone-700 mt-1" id="diagnosis-text">테스트 제출 시 취약 영역 분석이 표시됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-stone-200 py-6">
+        <div class="max-w-6xl mx-auto px-4 text-center text-xs text-stone-400">
+            © 2026 관계대명사 & What 마스터 트레이너 • Smart Grammar Learning System
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Practice Dataset based on PDF document
+        const practiceData = [
+            // Category: what
+            {
+                id: 1,
+                category: 'what',
+                categoryLabel: '관계대명사 What (주어 역할)',
+                kor: '내가 말했던 것은 사실이다.',
+                scrambled: ['I', 'said', 'is', 'true'],
+                neededRel: 'what',
+                answer: 'What I said is true.',
+                altAnswer: 'What I said is true',
+                explanation: '선행사 없이 "내가 말했던 것"이라는 주어 역할을 하므로 관계대명사 What을 앞에 넣습니다.'
+            },
+            {
+                id: 2,
+                category: 'what',
+                categoryLabel: '관계대명사 What (목적어 역할)',
+                kor: '나는 네가 원하는 것을 사줄 수 있다.',
+                scrambled: ['I', 'can', 'buy', 'you', 'you', 'want'],
+                neededRel: 'what',
+                answer: 'I can buy you what you want.',
+                altAnswer: 'I can buy you what you want',
+                explanation: 'buy의 간접목적어(you)와 직접목적어절(what you want)을 완성하기 위해 you 단어 카드가 2개 필요하며, want 뒤 목적어 역할을 하는 관계대명사 what이 배치됩니다.'
+            },
+            {
+                id: 3,
+                category: 'what',
+                categoryLabel: '관계대명사 What (명사절)',
+                kor: '네 주머니 안에 있는 것을 나에게 보여줘.',
+                scrambled: ['show', 'me', 'is', 'in', 'your', 'pocket'],
+                neededRel: 'what',
+                answer: 'Show me what is in your pocket.',
+                altAnswer: 'Show me what is in your pocket',
+                explanation: '"네 주머니 안에 있는 것"으로 선행사가 없으므로 관계대명사 what을 추가해야 합니다.'
+            },
+            {
+                id: 4,
+                category: 'what',
+                categoryLabel: '관계대명사 What (전치사의 목적어)',
+                kor: '네가 가진 것에 만족해라.',
+                scrambled: ['be', 'satisfied', 'with', 'you', 'have'],
+                neededRel: 'what',
+                answer: 'Be satisfied with what you have.',
+                altAnswer: 'Be satisfied with what you have',
+                explanation: '전치사 with 뒤에서 "~하는 것"을 의미하는 관계대명사 what이 필요합니다.'
+            },
+
+            // Category: general (주격, 목적격, 소유격)
+            {
+                id: 5,
+                category: 'general',
+                categoryLabel: '주격 관계대명사 (사람)',
+                kor: '나는 옆집에 사는 한 여자를 안다.',
+                scrambled: ['I', 'know', 'a', 'woman', 'lives', 'next', 'door'],
+                neededRel: 'who',
+                answer: 'I know a woman who lives next door.',
+                altAnswer: 'I know a woman who lives next door',
+                explanation: '선행사 a woman(사람) 뒤에 주어가 빠진 완전하지 않은 절이 오므로 주격 관계대명사 who가 들어갑니다.'
+            },
+            {
+                id: 6,
+                category: 'general',
+                categoryLabel: '주격 관계대명사 (사물)',
+                kor: '나는 매우 빠르게 달리는 차를 한 대 가지고 있다.',
+                scrambled: ['I', 'have', 'a', 'car', 'runs', 'very', 'fast'],
+                neededRel: 'which',
+                answer: 'I have a car which runs very fast.',
+                altAnswer: 'I have a car that runs very fast.',
+                explanation: '선행사 a car(사물)를 수식하고, 뒤에 주어가 빠졌으므로 주격 관계대명사 which(또는 that)를 씁니다.'
+            },
+            {
+                id: 7,
+                category: 'general',
+                categoryLabel: '소유격 관계대명사 (사람)',
+                kor: '나는 아버지가 의사인 한 친구가 있다.',
+                scrambled: ['I', 'have', 'a', 'friend', 'father', 'is', 'a', 'doctor'],
+                neededRel: 'whose',
+                answer: 'I have a friend whose father is a doctor.',
+                altAnswer: 'I have a friend whose father is a doctor',
+                explanation: '선행사 a friend의 소유격(~의 아버지) 의미를 나타내므로 소유격 관계대명사 whose를 사용합니다.'
+            },
+            {
+                id: 8,
+                category: 'general',
+                categoryLabel: '소유격 관계대명사 (사물)',
+                kor: '지붕이 빨간색인 그 집을 보아라.',
+                scrambled: ['look', 'at', 'the', 'house', 'roof', 'is', 'red'],
+                neededRel: 'whose',
+                answer: 'Look at the house whose roof is red.',
+                altAnswer: 'Look at the house whose roof is red',
+                explanation: '그 집의 지붕(the house\'s roof)을 수식하므로 사물 선행사라도 소유격 관계대명사 whose를 사용합니다.'
+            },
+            {
+                id: 9,
+                category: 'general',
+                categoryLabel: '목적격 관계대명사 (사람)',
+                kor: '이 사람이 내가 어제 만났던 그 남자이다.',
+                scrambled: ['this', 'is', 'the', 'man', 'I', 'met', 'yesterday'],
+                neededRel: 'whom',
+                answer: 'This is the man whom I met yesterday.',
+                altAnswer: 'This is the man who I met yesterday.',
+                explanation: '선행사가 the man이고 met 뒤의 목적어가 생략되었으므로 목적격 관계대명사 whom(또는 who)이 필요합니다.'
+            },
+            {
+                id: 10,
+                category: 'general',
+                categoryLabel: '목적격 관계대명사 (사물)',
+                kor: '이것이 내가 찾고 있던 그 책이다.',
+                scrambled: ['this', 'is', 'the', 'book', 'I', 'was', 'looking', 'for'],
+                neededRel: 'which',
+                answer: 'This is the book which I was looking for.',
+                altAnswer: 'This is the book that I was looking for.',
+                explanation: '선행사 the book(사물) 뒤 전치사 for의 목적어가 누락되었으므로 목적격 관계대명사 which(또는 that)를 써야 합니다.'
+            },
+
+            // Category: that_special
+            {
+                id: 11,
+                category: 'that_special',
+                categoryLabel: 'that 한정 수식 (Everything)',
+                kor: '그가 말한 모든 것은 나를 행복하게 만들었다.',
+                scrambled: ['everything', 'he', 'said', 'made', 'me', 'happy'],
+                neededRel: 'that',
+                answer: 'Everything that he said made me happy.',
+                altAnswer: 'Everything he said made me happy.',
+                explanation: '선행사가 everything 일 때는 주로 관계대명사 that을 사용하는 것이 원칙입니다.'
+            },
+            {
+                id: 12,
+                category: 'general',
+                categoryLabel: '주격 관계대명사 (복수 선행사)',
+                kor: '영어를 공부하는 그 학생들은 매우 부지런하다.',
+                scrambled: ['the', 'students', 'study', 'English', 'are', 'very', 'diligent'],
+                neededRel: 'who',
+                answer: 'The students who study English are very diligent.',
+                altAnswer: 'The students who study English are very diligent',
+                explanation: '선행사 The students(사람 복수) 뒤에 주격 관계대명사 who를 넣고 복수동사 study를 이어줍니다.'
+            },
+            {
+                id: 13,
+                category: 'that_special',
+                categoryLabel: 'that 한정 수식 (The only thing)',
+                kor: '중요한 유일한 것은 너의 건강이다.',
+                scrambled: ['the', 'only', 'thing', 'matters', 'is', 'your', 'health'],
+                neededRel: 'that',
+                answer: 'The only thing that matters is your health.',
+                altAnswer: 'The only thing that matters is your health',
+                explanation: '선행사에 the only가 포함되어 있으므로 관계대명사 that을 꼭 써주는 것이 바릅니다.'
+            }
+        ];
+
+        // Quiz Questions Dataset (Fill-in-the-blank & O/X)
+        const quizData = [
+            {
+                id: 101,
+                type: 'blank',
+                question: 'I know a girl _______ speaks five languages fluently.',
+                options: ['who', 'which', 'what', 'whose'],
+                correctIdx: 0,
+                explanation: '선행사 a girl이 사람이고 뒤에 주어가 빠졌으므로 주격 관계대명사 who가 정답입니다.'
+            },
+            {
+                id: 102,
+                type: 'blank',
+                question: 'This is the laptop _______ I bought online last week.',
+                options: ['who', 'which', 'what', 'whose'],
+                correctIdx: 1,
+                explanation: '선행사가 the laptop(사물)이고 bought 뒤에 목적어가 빠졌으므로 목적격 관계대명사 which가 정답입니다.'
+            },
+            {
+                id: 103,
+                type: 'blank',
+                question: 'The boy _______ father is a famous chef is my classmate.',
+                options: ['who', 'whom', 'whose', 'what'],
+                correctIdx: 2,
+                explanation: '뒤에 명사 father가 오고 "그 소년의 아버지"라는 소유의 관계이므로 소유격 관계대명사 whose가 올바릅니다.'
+            },
+            {
+                id: 104,
+                type: 'blank',
+                question: 'I can\'t remember _______ she told me yesterday.',
+                options: ['that', 'which', 'what', 'who'],
+                correctIdx: 2,
+                explanation: '선행사가 없고, "그녀가 말해준 것"이라는 명사절 목적어 자리를 이끄므로 관계대명사 what이 들어갑니다.'
+            },
+            {
+                id: 105,
+                type: 'blank',
+                question: 'The only thing _______ matters is your health.',
+                options: ['what', 'which', 'that', 'whose'],
+                correctIdx: 2,
+                explanation: '선행사에 the only가 붙어있으므로 관계대명사는 주로 that을 사용합니다.'
+            },
+            {
+                id: 106,
+                type: 'ox',
+                question: 'This is what I need it for the project.',
+                correctAnswer: 'X',
+                correctSentence: 'This is what I need for the project.',
+                explanation: '관계대명사 what은 목적어 역할을 대신하므로, need 뒤에 대명사 it을 중복으로 사용하면 틀립니다.'
+            },
+            {
+                id: 107,
+                type: 'ox',
+                question: 'What she did yesterday was very surprising.',
+                correctAnswer: 'O',
+                explanation: 'what절이 문장의 주어로 올 때는 단수 취급하므로 be동사 was가 올바르게 사용되었습니다.'
+            },
+            {
+                id: 108,
+                type: 'ox',
+                question: 'I believe what you will pass the English exam.',
+                correctAnswer: 'X',
+                correctSentence: 'I believe that you will pass the English exam.',
+                explanation: '뒤 문장(you will pass the English exam)이 완벽한 구조를 이루고 있으므로 접속사 that이 들어가야 합니다.'
+            },
+            {
+                id: 109,
+                type: 'ox',
+                question: 'Let\'s eat what you like.',
+                correctAnswer: 'O',
+                explanation: '선행사가 없고, like의 목적어가 빠진 불완전한 절이 오므로 "네가 좋아하는 것"의 의미인 what이 정답입니다.'
+            },
+            {
+                id: 110,
+                type: 'ox',
+                question: 'Is this the book what you recommended to me?',
+                correctAnswer: 'X',
+                correctSentence: 'Is this the book that (or which) you recommended to me?',
+                explanation: '앞에 선행사 the book이 존재하므로 선행사를 포함하는 what을 쓸 수 없습니다. which나 that으로 고쳐야 합니다.'
+            }
+        ];
+
+        // State Variables
+        let currentPracticeCategory = 'all';
+        let currentPracticeIdx = 0;
+        let selectedChips = [];
+        let userQuizAnswers = {};
+
+        // Initialization
+        document.addEventListener("DOMContentLoaded", () => {
+            renderPracticeCard();
+            renderQuizList();
+        });
+
+        // Tab Navigation
+        function switchTab(tabId) {
+            ['overview', 'practice', 'test'].forEach(t => {
+                document.getElementById(`sec-${t}`).classList.add('hidden');
+                const btn = document.getElementById(`tab-${t}`);
+                if (btn) btn.className = "px-4 py-2 rounded-lg text-indigo-700 hover:text-indigo-950 transition";
+            });
+
+            document.getElementById(`sec-${tabId}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            if (activeBtn) activeBtn.className = "px-4 py-2 rounded-lg bg-white shadow-sm text-indigo-900 font-bold transition";
+        }
+
+        // Practice Category Selection
+        function setPracticeCategory(cat) {
+            currentPracticeCategory = cat;
+            currentPracticeIdx = 0;
+            
+            ['all', 'what', 'general', 'that_special'].forEach(c => {
+                const b = document.getElementById(`pcat-${c}`);
+                if (b) {
+                    b.className = (c === cat) 
+                        ? "px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-700 text-white"
+                        : "px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200";
+                }
+            });
+
+            renderPracticeCard();
+        }
+
+        function getFilteredPracticeList() {
+            if (currentPracticeCategory === 'all') return practiceData;
+            return practiceData.filter(item => item.category === currentPracticeCategory);
+        }
+
+        // Render Practice Card
+        function renderPracticeCard() {
+            const list = getFilteredPracticeList();
+            const container = document.getElementById('practice-card-container');
+
+            if (list.length === 0) {
+                container.innerHTML = `<p class="text-center text-stone-500 py-8">해당 카테고리에 문항이 없습니다.</p>`;
+                return;
+            }
+
+            if (currentPracticeIdx >= list.length) currentPracticeIdx = 0;
+
+            const item = list[currentPracticeIdx];
+            selectedChips = [];
+
+            // Add standard relative pronoun option pool
+            const relOptions = ['who', 'whom', 'whose', 'which', 'that', 'what'];
+
+            container.innerHTML = `
+                <div class="space-y-6">
+                    <!-- Progress Info -->
+                    <div class="flex justify-between items-center border-b pb-3">
+                        <span class="px-3 py-1 bg-indigo-100 text-indigo-900 rounded-full text-xs font-bold">
+                            ${item.categoryLabel} (${currentPracticeIdx + 1} / ${list.length})
+                        </span>
+                    </div>
+
+                    <!-- Korean Statement -->
+                    <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
+                        <p class="text-xs text-indigo-600 font-bold mb-1">우리말 해석</p>
+                        <p class="text-lg font-bold text-indigo-950">"${item.kor}"</p>
+                    </div>
+
+                    <!-- Drop Zone -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs font-bold text-stone-600">조합된 문장 (카드 클릭하여 배치/취소):</label>
+                            <button onclick="clearSelectedChips()" class="text-xs text-rose-600 hover:underline font-medium">초기화 ❌</button>
+                        </div>
+                        <div id="drop-zone" class="min-h-[56px] p-3 bg-stone-100 border-2 border-dashed border-stone-300 rounded-xl flex flex-wrap gap-2 items-center">
+                            <span class="text-stone-400 text-xs">아래 단어 카드를 클릭해 문장을 만들어 보세요.</span>
+                        </div>
+                    </div>
+
+                    <!-- Available Word Chips Pool -->
+                    <div class="space-y-3">
+                        <div>
+                            <p class="text-xs font-bold text-stone-600 mb-1">제시어 단어 카드:</p>
+                            <div id="chips-pool" class="flex flex-wrap gap-2">
+                                ${item.scrambled.map((word, idx) => `
+                                    <button onclick="selectChip('${word}', 'word-${idx}')" id="word-${idx}" class="chip-btn px-3 py-1.5 bg-white border border-stone-300 hover:border-indigo-500 rounded-lg text-sm font-medium text-stone-700 shadow-sm">
+                                        ${word}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="text-xs font-bold text-amber-800 mb-1">➕ 관계대명사 추가 카드 (필요한 위치에 클릭하여 삽입):</p>
+                            <div class="flex flex-wrap gap-2">
+                                ${relOptions.map((rel, rIdx) => `
+                                    <button onclick="selectChip('${rel}', 'rel-${rIdx}', true)" class="chip-btn px-3 py-1.5 bg-amber-50 border border-amber-300 hover:bg-amber-100 text-amber-900 rounded-lg text-sm font-bold shadow-sm">
+                                        + ${rel}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Final Input Box -->
+                    <div>
+                        <label class="text-xs font-bold text-stone-600 mb-1 block">영작 최종 수정창 (마침표, 대소문자 확인):</label>
+                        <input type="text" id="user-final-input" class="w-full p-3 border border-stone-300 rounded-xl text-sm font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none" placeholder="카드를 배치하면 자동 입력됩니다." />
+                    </div>
+
+                    <!-- Bottom Action Controls: Previous / Submit / Next -->
+                    <div class="flex flex-wrap items-center gap-2 pt-2">
+                        <button onclick="prevPractice()" ${currentPracticeIdx === 0 ? 'disabled class="opacity-40 cursor-not-allowed px-3.5 py-2.5 bg-stone-100 text-stone-500 rounded-xl text-xs font-bold"' : 'class="px-3.5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-bold transition shadow-sm"'}>
+                            ◀ 이전
+                        </button>
+                        
+                        <button onclick="checkPracticeAnswer()" class="flex-1 min-w-[150px] py-2.5 bg-indigo-700 hover:bg-indigo-800 text-white text-xs sm:text-sm font-bold rounded-xl shadow transition">
+                            정답 확인 및 관계대명사 해설 보기 ✅
+                        </button>
+
+                        <button onclick="nextPractice()" ${currentPracticeIdx === list.length - 1 ? 'disabled class="opacity-40 cursor-not-allowed px-3.5 py-2.5 bg-stone-100 text-stone-500 rounded-xl text-xs font-bold"' : 'class="px-3.5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-bold transition shadow-sm"'}>
+                            다음 ▶
+                        </button>
+                    </div>
+
+                    <!-- Feedback Area -->
+                    <div id="practice-feedback" class="hidden p-4 rounded-xl border"></div>
+                </div>
+            `;
+        }
+
+        function selectChip(word, elementId, isRel = false) {
+            if (!isRel) {
+                const btn = document.getElementById(elementId);
+                if (btn.disabled) return;
+                btn.disabled = true;
+                btn.classList.add('opacity-40', 'cursor-not-allowed');
+            }
+
+            selectedChips.push({ word, elementId, isRel });
+            updateDropZoneAndInput();
+        }
+
+        function removeChip(arrayIdx) {
+            const removed = selectedChips.splice(arrayIdx, 1)[0];
+            if (!removed.isRel) {
+                const btn = document.getElementById(removed.elementId);
+                if (btn) {
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-40', 'cursor-not-allowed');
+                }
+            }
+            updateDropZoneAndInput();
+        }
+
+        function clearSelectedChips() {
+            selectedChips.forEach(item => {
+                if (!item.isRel) {
+                    const btn = document.getElementById(item.elementId);
+                    if (btn) {
+                        btn.disabled = false;
+                        btn.classList.remove('opacity-40', 'cursor-not-allowed');
+                    }
+                }
+            });
+            selectedChips = [];
+            updateDropZoneAndInput();
+        }
+
+        function updateDropZoneAndInput() {
+            const dropZone = document.getElementById('drop-zone');
+            const input = document.getElementById('user-final-input');
+
+            if (selectedChips.length === 0) {
+                dropZone.innerHTML = `<span class="text-stone-400 text-xs">아래 단어 카드를 클릭해 문장을 만들어 보세요.</span>`;
+                input.value = "";
+                return;
+            }
+
+            dropZone.innerHTML = selectedChips.map((item, index) => `
+                <span onclick="removeChip(${index})" class="chip-btn px-3 py-1 ${item.isRel ? 'bg-amber-100 border-amber-300 text-amber-950 font-extrabold' : 'bg-indigo-100 border-indigo-300 text-indigo-900 font-bold'} border rounded-lg text-xs cursor-pointer hover:bg-rose-100 hover:text-rose-800 transition">
+                    ${item.word} ✕
+                </span>
+            `).join('');
+
+            let sentence = selectedChips.map(c => c.word).join(' ');
+            sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1);
+            if (!sentence.endsWith('.')) sentence += '.';
+            input.value = sentence;
+        }
+
+        function checkPracticeAnswer() {
+            const list = getFilteredPracticeList();
+            const item = list[currentPracticeIdx];
+            const inputVal = document.getElementById('user-final-input').value.trim();
+            const feedback = document.getElementById('practice-feedback');
+
+            feedback.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'bg-rose-50', 'border-rose-200');
+
+            const cleanUser = inputVal.replace(/[.,]/g, '').toLowerCase().replace(/\s+/g, ' ');
+            const cleanAns = item.answer.replace(/[.,]/g, '').toLowerCase().replace(/\s+/g, ' ');
+            const cleanAlt = item.altAnswer ? item.altAnswer.replace(/[.,]/g, '').toLowerCase().replace(/\s+/g, ' ') : '';
+
+            const isCorrect = (cleanUser === cleanAns || (cleanAlt && cleanUser === cleanAlt));
+
+            if (isCorrect) {
+                feedback.classList.add('bg-emerald-50', 'border-emerald-200');
+                feedback.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <span class="text-2xl">🎉</span>
+                        <div>
+                            <h4 class="font-bold text-emerald-900">정답입니다! 올바른 관계대명사를 선택했습니다.</h4>
+                            <p class="text-xs text-stone-700 font-mono mt-1"><strong>정답 문장:</strong> ${item.answer}</p>
+                            <p class="text-xs text-emerald-800 mt-2">💡 <strong>관계대명사 포인트:</strong> ${item.explanation}</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                feedback.classList.add('bg-rose-50', 'border-rose-200');
+                feedback.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <span class="text-2xl">💡</span>
+                        <div>
+                            <h4 class="font-bold text-rose-900">관계대명사 위치나 종류를 다시 확인해 보세요.</h4>
+                            <p class="text-xs text-stone-700 font-mono mt-1"><strong>모범 정답:</strong> ${item.answer}</p>
+                            <p class="text-xs text-rose-800 mt-2">💡 <strong>문법 해설:</strong> ${item.explanation}</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function nextPractice() {
+            const list = getFilteredPracticeList();
+            currentPracticeIdx = (currentPracticeIdx + 1) % list.length;
+            renderPracticeCard();
+        }
+
+        function prevPractice() {
+            const list = getFilteredPracticeList();
+            currentPracticeIdx = (currentPracticeIdx - 1 + list.length) % list.length;
+            renderPracticeCard();
+        }
+
+        // Quiz Renderer
+        function renderQuizList() {
+            const container = document.getElementById('quiz-wrapper');
+            container.innerHTML = quizData.map((q, idx) => {
+                if (q.type === 'ox') {
+                    return `
+                        <div class="bg-white rounded-2xl border border-stone-200 p-5 shadow-sm space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2.5 py-0.5 bg-indigo-100 text-indigo-900 rounded text-xs font-bold">문제 ${idx + 1} (O/X 문법 판별)</span>
+                            </div>
+                            <p class="text-base font-bold text-stone-800 font-mono">"${q.question}"</p>
+                            
+                            <div class="flex gap-4 pt-2">
+                                <button onclick="setQuizAnswer(${q.id}, 'O')" id="q-${q.id}-O" class="flex-1 py-3 border-2 border-stone-200 hover:border-emerald-500 rounded-xl font-bold text-lg text-stone-700 transition">
+                                    ⭕ 맞음 (O)
+                                </button>
+                                <button onclick="setQuizAnswer(${q.id}, 'X')" id="q-${q.id}-X" class="flex-1 py-3 border-2 border-rose-500 rounded-xl font-bold text-lg text-stone-700 transition">
+                                    ❌ 틀림 (X)
+                                </button>
+                            </div>
+                            <div id="q-${q.id}-explain" class="hidden p-3 rounded-lg text-xs bg-stone-50 border border-stone-200"></div>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="bg-white rounded-2xl border border-stone-200 p-5 shadow-sm space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2.5 py-0.5 bg-amber-100 text-amber-900 rounded text-xs font-bold">문제 ${idx + 1} (빈칸 알맞은 관계대명사 선택)</span>
+                            </div>
+                            <p class="text-base font-bold text-stone-800 font-mono">${q.question}</p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 pt-2">
+                                ${q.options.map((opt, oIdx) => `
+                                    <button onclick="setQuizAnswer(${q.id}, ${oIdx})" id="q-${q.id}-opt-${oIdx}" class="p-3 border border-stone-200 hover:border-indigo-500 rounded-xl text-xs font-bold text-stone-700 transition">
+                                        ${opt}
+                                    </button>
+                                `).join('')}
+                            </div>
+                            <div id="q-${q.id}-explain" class="hidden p-3 rounded-lg text-xs bg-stone-50 border border-stone-200"></div>
+                        </div>
+                    `;
+                }
+            }).join('') + `
+                <div class="pt-4">
+                    <button onclick="submitQuiz()" class="w-full py-4 bg-indigo-950 hover:bg-indigo-900 text-white text-base font-bold rounded-2xl shadow-lg transition">
+                        📊 제출하고 진단 결과 리포트 보기
+                    </button>
+                </div>
+            `;
+        }
+
+        function setQuizAnswer(qId, val) {
+            userQuizAnswers[qId] = val;
+            const q = quizData.find(item => item.id === qId);
+
+            if (q.type === 'ox') {
+                document.getElementById(`q-${qId}-O`).className = (val === 'O') 
+                    ? "flex-1 py-3 border-2 border-emerald-600 bg-emerald-50 rounded-xl font-bold text-lg text-emerald-800"
+                    : "flex-1 py-3 border-2 border-stone-200 rounded-xl font-bold text-lg text-stone-700";
+                document.getElementById(`q-${qId}-X`).className = (val === 'X') 
+                    ? "flex-1 py-3 border-2 border-rose-600 bg-rose-50 rounded-xl font-bold text-lg text-rose-800"
+                    : "flex-1 py-3 border-2 border-stone-200 rounded-xl font-bold text-lg text-stone-700";
+            } else {
+                q.options.forEach((_, oIdx) => {
+                    const btn = document.getElementById(`q-${qId}-opt-${oIdx}`);
+                    btn.className = (val === oIdx)
+                        ? "p-3 border-2 border-indigo-600 bg-indigo-50 rounded-xl text-xs font-bold text-indigo-900"
+                        : "p-3 border border-stone-200 rounded-xl text-xs font-bold text-stone-700";
+                });
+            }
+        }
+
+        let scoreChartInstance = null;
+
+        function submitQuiz() {
+            let correctCount = 0;
+
+            quizData.forEach(q => {
+                const expBox = document.getElementById(`q-${q.id}-explain`);
+                expBox.classList.remove('hidden');
+
+                const userAns = userQuizAnswers[q.id];
+                let isRight = false;
+
+                if (q.type === 'ox') {
+                    isRight = (userAns === q.correctAnswer);
+                } else {
+                    isRight = (userAns === q.correctIdx);
+                }
+
+                if (isRight) {
+                    correctCount++;
+                    expBox.className = "p-3 rounded-lg text-xs bg-emerald-50 border border-emerald-200 text-emerald-900";
+                    expBox.innerHTML = `✅ <strong>정답!</strong> ${q.explanation} ${q.correctSentence ? `<br>👉 올바른 문장: <i>${q.correctSentence}</i>` : ''}`;
+                } else {
+                    expBox.className = "p-3 rounded-lg text-xs bg-rose-50 border border-rose-200 text-rose-900";
+                    expBox.innerHTML = `❌ <strong>오답!</strong> 정답: ${q.type === 'ox' ? q.correctAnswer : q.options[q.correctIdx]}.<br>${q.explanation} ${q.correctSentence ? `<br>👉 올바른 문장: <i>${q.correctSentence}</i>` : ''}`;
+                }
+            });
+
+            // Summary
+            const resultBox = document.getElementById('quiz-results');
+            resultBox.classList.remove('hidden');
+            document.getElementById('final-score-text').innerText = `${correctCount} / ${quizData.length} 점`;
+
+            const scoreRatio = (correctCount / quizData.length) * 100;
+            let diag = "";
+            if (scoreRatio === 100) {
+                diag = "🎉 축하합니다! 관계대명사(who, which, whose, what, that) 및 접속사 구분 능력이 완벽합니다!";
+            } else if (scoreRatio >= 70) {
+                diag = "👍 관계대명사 개념 이해도가 훌륭합니다. what과 that(관계대명사/접속사)의 구분 문제 해설을 다시 한 번 복습해 보세요.";
+            } else {
+                diag = "⚠️ 선행사 유무(선행사가 있으면 who/which/that, 없으면 what)와 뒤 문장 완전성 여부를 [개념 정리] 탭에서 다시 복습해 보세요.";
+            }
+            document.getElementById('diagnosis-text').innerText = diag;
+
+            // Chart.js Rendering
+            const ctx = document.getElementById('scoreChart').getContext('2d');
+            if (scoreChartInstance) scoreChartInstance.destroy();
+
+            scoreChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['정답', '오답'],
+                    datasets: [{
+                        data: [correctCount, quizData.length - correctCount],
+                        backgroundColor: ['#3730a3', '#f43f5e']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+
+            resultBox.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetTest() {
+            userQuizAnswers = {};
+            document.getElementById('quiz-results').classList.add('hidden');
+            renderQuizList();
+        }
+    </script>
+</body>
+</html>
